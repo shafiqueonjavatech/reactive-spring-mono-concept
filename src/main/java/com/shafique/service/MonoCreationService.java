@@ -2,7 +2,9 @@ package com.shafique.service;
 
 import reactor.core.publisher.Mono;
 
-public class MonoService {
+public class MonoCreationService {
+    
+    // Mono Creational operator
     
     public Mono<String> emptyMono(){
         return Mono.empty();
@@ -13,9 +15,7 @@ public class MonoService {
     }
     
     public Mono<String> monoFromCallable(){
-        return Mono.fromCallable( ()-> {
-            return "i am returning inline";
-        } );
+        return Mono.fromCallable( ()-> "i am returning inline" );
     }
     
     public Mono<String> monoFromSupplier(){
@@ -41,6 +41,7 @@ public class MonoService {
         return Mono.just ( System.currentTimeMillis () );
     }
     
+    //Mono  transformation Operator
     
     
 }
