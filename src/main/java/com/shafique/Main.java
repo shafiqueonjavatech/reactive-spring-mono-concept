@@ -1,6 +1,7 @@
 package com.shafique;
 
 import com.shafique.service.MonoCreationService;
+import com.shafique.service.MonoTransformationService;
 import reactor.core.publisher.Mono;
 
 public class Main {
@@ -34,5 +35,27 @@ public class Main {
         mono2.doOnNext ( System.out::println ).subscribe ();
         Thread.sleep(1000);
         mono2.doOnNext ( System.out::println ).subscribe ();
+        
+        
+        MonoTransformationService monoTransformationService =
+                new MonoTransformationService ();
+        
+        /**
+         * you should understand the difference between map and flatmap, map only
+         * trasform the value present in stream, as shown here converting from lower case
+         * to upper case.
+         */
+        monoTransformationService.mapToUpper().doOnNext( System.out::println ).subscribe();
+        
+        /**
+         * here you can see i am changing the type from string to integer
+         */
+        monoTransformationService.convertToLength().doOnNext( System.out::println ).subscribe();
+        
+        /**
+         * here i am applying filter on element and if filter condition is not met,
+         * stream will empty , which i am replacing with Integer.MIN_VAL
+         */
+        monoTransformationService.filterMono ().doOnNext ( System.out::println ).subscribe ();
     }
 }
