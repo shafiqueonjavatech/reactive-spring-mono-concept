@@ -18,4 +18,12 @@ public class MonoTransformationService {
         return Mono.just ( 734 ).filter (  i -> i < 300 ).defaultIfEmpty ( Integer.MIN_VALUE );
     }
     
+    public Mono<String> monoEmplty(){
+        return Mono.empty ();
+    }
+    
+    public Mono<String> getBillNumber(){
+        return Mono.just( "345" );
+    }
+    
 }

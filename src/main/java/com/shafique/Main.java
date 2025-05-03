@@ -36,6 +36,7 @@ public class Main {
         Thread.sleep(1000);
         mono2.doOnNext ( System.out::println ).subscribe ();
         
+        //Mono transformation operator
         
         MonoTransformationService monoTransformationService =
                 new MonoTransformationService ();
@@ -58,6 +59,23 @@ public class Main {
          */
         monoTransformationService.filterMono ().doOnNext ( System.out::println ).subscribe ();
         
+        monoTransformationService.monoEmplty()
+                .defaultIfEmpty ( "No Value " +"in" +" stream" )
+                .doOnNext (System.out::println).subscribe ();
         
+        monoTransformationService.monoEmplty().switchIfEmpty(
+                Mono.just( "get data " +"from alt source, when stream is emplty" )
+        ).doOnNext (  System.out::println  ).subscribe ();
+        
+        monoTransformationService.getBillNumber()
+                .doOnNext(s -> {
+                    System.out.println ( "element type is "+s.getClass().toString ());
+                    } )
+                .map ( Integer::parseInt )
+                .cast(Integer.class)
+                .doOnNext (v -> {
+                    System.out.println ( "element type is "+v.getClass().toString ());
+                    } )
+                .subscribe ();
     }
 }

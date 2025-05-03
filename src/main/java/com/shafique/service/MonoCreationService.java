@@ -27,11 +27,9 @@ public class MonoCreationService {
         return Mono.empty ();
     }
     
-    
     private String returnSomeValue(){
         return "i was executed eagerly";
     }
-    
     
     public Mono<Long> monoDefer(){
         return Mono.defer( () -> Mono.just ( System.currentTimeMillis () ));
