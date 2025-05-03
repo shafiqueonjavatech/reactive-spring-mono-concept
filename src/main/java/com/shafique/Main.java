@@ -4,10 +4,6 @@ import com.shafique.service.MonoCreationService;
 import com.shafique.service.MonoTransformationService;
 import reactor.core.publisher.Mono;
 
-import javax.lang.model.element.NestingKind;
-import java.rmi.StubNotFoundException;
-import java.util.concurrent.Flow;
-
 public class Main {
     public static void main ( String[] args ) throws InterruptedException {
         MonoCreationService monoCreationService = new MonoCreationService ();
@@ -72,14 +68,10 @@ public class Main {
         ).doOnNext (  System.out::println  ).subscribe ();
         
         monoTransformationService.getBillNumber()
-                .doOnNext(s -> {
-                    System.out.println ( "element type is "+s.getClass().toString ());
-                    } )
+                .doOnNext(s -> System.out.println ( "element type is "+s.getClass()) )
                 .map ( Integer::parseInt )
                 .cast(Integer.class)
-                .doOnNext (v -> {
-                    System.out.println ( "element type is "+v.getClass().toString ());
-                    } )
+                .doOnNext (v -> System.out.println ( "element type is "+v.getClass()))
                 .subscribe ();
         
         
@@ -96,7 +88,6 @@ public class Main {
                     var userId = tuple.getT1 ();
                     var department = tuple.getT2 ();
                      System.out.print("UserId is "+userId+" and department is "+department);
-                    return;
                 }).subscribe();
         
     }
