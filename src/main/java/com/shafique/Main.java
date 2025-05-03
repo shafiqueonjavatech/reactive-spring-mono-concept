@@ -48,7 +48,7 @@ public class Main {
         monoTransformationService.mapToUpper().doOnNext( System.out::println ).subscribe();
         
         /**
-         * here you can see i am changing the type from string to integer
+         * here you can see i am changing the type from string to integer using flatmap
          */
         monoTransformationService.convertToLength().doOnNext( System.out::println ).subscribe();
         
@@ -57,5 +57,7 @@ public class Main {
          * stream will empty , which i am replacing with Integer.MIN_VAL
          */
         monoTransformationService.filterMono ().doOnNext ( System.out::println ).subscribe ();
+        
+        
     }
 }
