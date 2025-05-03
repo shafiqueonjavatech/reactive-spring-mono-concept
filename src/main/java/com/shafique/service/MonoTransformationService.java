@@ -26,4 +26,12 @@ public class MonoTransformationService {
         return Mono.just( "345" );
     }
     
+    public Mono<String> zipWithP1(){
+        return Mono.just ( "A" );
+    }
+    
+    public Mono<Integer> zipWithP2(){
+        return Mono.just ( 1 );
+    }
+    
 }

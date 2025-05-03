@@ -77,5 +77,16 @@ public class Main {
                     System.out.println ( "element type is "+v.getClass().toString ());
                     } )
                 .subscribe ();
+        
+        
+        Mono<String> monoPart1 = monoTransformationService.zipWithP1();
+        Mono<Integer> monoPart2 = monoTransformationService.zipWithP2();
+        
+        monoPart1.zipWith( monoPart2, (a,b) -> a.concat ( String.valueOf ( b ) ) )
+                .doOnNext( System.out::println ).subscribe();
+        
+        
     }
+    
+    
 }
