@@ -2,6 +2,8 @@ package com.shafique.service;
 
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
+
 public class MonoTransformationService {
     
     //Mono  transformation Operator
@@ -32,6 +34,15 @@ public class MonoTransformationService {
     
     public Mono<Integer> zipWithP2(){
         return Mono.just ( 1 );
+    }
+    
+    public Mono<String> getUserId(){
+        return Mono.just ( "user123" );
+    }
+    
+    public Mono<String> getUserDepartment(String userId){
+        Map<String, String> userMap = Map.of ( "user123", "EMS" );
+        return Mono.justOrEmpty ( userMap.get ( userId ) );
     }
     
 }

@@ -4,6 +4,10 @@ import com.shafique.service.MonoCreationService;
 import com.shafique.service.MonoTransformationService;
 import reactor.core.publisher.Mono;
 
+import javax.lang.model.element.NestingKind;
+import java.rmi.StubNotFoundException;
+import java.util.concurrent.Flow;
+
 public class Main {
     public static void main ( String[] args ) throws InterruptedException {
         MonoCreationService monoCreationService = new MonoCreationService ();
@@ -85,6 +89,15 @@ public class Main {
         monoPart1.zipWith( monoPart2, (a,b) -> a.concat ( String.valueOf ( b ) ) )
                 .doOnNext( System.out::println ).subscribe();
         
+        
+        monoTransformationService.getUserId ()
+                .zipWhen(id -> monoTransformationService.getUserDepartment( id ))
+                .doOnNext ( tuple -> {
+                    var userId = tuple.getT1 ();
+                    var department = tuple.getT2 ();
+                     System.out.print("UserId is "+userId+" and department is "+department);
+                    return;
+                }).subscribe();
         
     }
     
